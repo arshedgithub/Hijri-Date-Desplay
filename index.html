@@ -18,7 +18,9 @@
       const hijriJson = await res.json();
       const { date, month, weekday } = hijriJson.data.hijri;
 
-      Hdisplay.innerHTML = date + month.ar + weekday;
+      Hdisplay.innerHTML = date;
+      hijMonth.innerHTML = month.en + " - " + month.ar;
+      hijDay.innerHTML = weekday.en + " - " + weekday.ar;
     }
 
     hijriDate();
