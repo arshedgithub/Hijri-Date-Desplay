@@ -1,0 +1,26 @@
+<html>
+  <h1 id="hijriDisplay"></h1>
+  <h2>Month : <span id="hijMonth"></span></h2>
+  <h2>Day : <span id="hijDay"></span></h2>
+
+  <script>
+    const Hdisplay = document.getElementById("hijriDisplay");
+
+    const dte = new Date();
+
+    const gregDate =
+      dte.getDate() + "-" + (dte.getMonth() + 1) + "-" + dte.getFullYear();
+
+    async function hijriDate() {
+      const res = await fetch(
+        "https://api.aladhan.com/v1/gToH?date=" + gregDate
+      );
+      const hijriJson = await res.json();
+      const { date, month, weekday } = hijriJson.data.hijri;
+
+      Hdisplay.innerHTML = date + month.ar + weekday;
+    }
+
+    hijriDate();
+  </script>
+</html>
