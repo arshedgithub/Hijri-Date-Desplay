@@ -1,28 +1,35 @@
 <html>
-  <h1 id="hijriDisplay"></h1>
-  <h2>Month : <span id="hijMonth"></span></h2>
-  <h2>Day : <span id="hijDay"></span></h2>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div>
+      <h1 id="hijriDisplay"></h1>
+      <h2>Month : <span id="hijMonth"></span></h2>
+      <h2>Day : <span id="hijDay"></span></h2>
+    </div>
 
-  <script>
-    const Hdisplay = document.getElementById("hijriDisplay");
+    <script>
+      const Hdisplay = document.getElementById("hijriDisplay");
 
-    const dte = new Date();
+      const dte = new Date();
 
-    const gregDate =
-      dte.getDate() + "-" + (dte.getMonth() + 1) + "-" + dte.getFullYear();
+      const gregDate =
+        dte.getDate() + "-" + (dte.getMonth() + 1) + "-" + dte.getFullYear();
 
-    async function hijriDate() {
-      const res = await fetch(
-        "https://api.aladhan.com/v1/gToH?date=" + gregDate
-      );
-      const hijriJson = await res.json();
-      const { date, month, weekday } = hijriJson.data.hijri;
+      async function hijriDate() {
+        const res = await fetch(
+          "https://api.aladhan.com/v1/gToH?date=" + gregDate
+        );
+        const hijriJson = await res.json();
+        const { date, month, weekday } = hijriJson.data.hijri;
 
-      Hdisplay.innerHTML = date;
-      hijMonth.innerHTML = month.en + " - " + month.ar;
-      hijDay.innerHTML = weekday.en + " - " + weekday.ar;
-    }
+        Hdisplay.innerHTML = date;
+        hijMonth.innerHTML = month.en + " - " + month.ar;
+        hijDay.innerHTML = weekday.en + " - " + weekday.ar;
+      }
 
-    hijriDate();
-  </script>
+      hijriDate();
+    </script>
+  </body>
 </html>
